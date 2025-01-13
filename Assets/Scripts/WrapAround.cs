@@ -29,6 +29,22 @@ public class WrapAround : MonoBehaviour
             newPosition.y = body.position.y;
             body.position = newPosition;
         }
+
+        var currentToTop = GetTopPosition() - body.position;
+        if (currentToTop.y < 0f)
+        {
+            var newPosition = GetBottomPosition();
+            newPosition.x = body.position.x;
+            body.position = newPosition;
+        }
+
+        var currentToBottom = GetBottomPosition() - body.position;
+        if (currentToBottom.y > 0f)
+        {
+            var newPosition = GetTopPosition();
+            newPosition.x = body.position.x;
+            body.position = newPosition;
+        }
     }
 
     private void OnDrawGizmos()
