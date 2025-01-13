@@ -15,9 +15,17 @@ public class WrapAround : MonoBehaviour
     {
         // GetRightPosition()   <<<   body.position
         var currentToRightSide = GetRightPosition() - body.position;
-        if(currentToRightSide.x < 0f)
+        if (currentToRightSide.x < 0f)
         {
             var newPosition = GetLeftPosition();
+            newPosition.y = body.position.y;
+            body.position = newPosition;
+        }
+
+        var currentToLeftSide = GetLeftPosition() - body.position;
+        if (currentToLeftSide.x > 0f)
+        {
+            var newPosition = GetRightPosition();
             newPosition.y = body.position.y;
             body.position = newPosition;
         }
