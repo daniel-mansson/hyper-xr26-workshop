@@ -3,15 +3,24 @@ using UnityEngine;
 public class WrapAround : MonoBehaviour
 {
     private Camera mainCamera;
+    private Rigidbody2D body;
 
     void Start()
     {
+        body = GetComponent<Rigidbody2D>();
         mainCamera = Camera.main;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        
+        // GetRightPosition()   <<<   body.position
+        var currentToRightSide = GetRightPosition() - body.position;
+        if(currentToRightSide.x < 0f)
+        {
+            var newPosition = GetLeftPosition();
+            newPosition.y = body.position.y;
+            body.position = newPosition;
+        }
     }
 
     private void OnDrawGizmos()
