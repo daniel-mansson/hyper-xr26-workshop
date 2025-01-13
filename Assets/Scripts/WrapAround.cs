@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class WrapAround : MonoBehaviour
 {
+    [SerializeField]
+    private float offset;
+
     private Camera mainCamera;
     private Rigidbody2D body;
 
@@ -47,7 +50,7 @@ public class WrapAround : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         mainCamera = Camera.main;
 
@@ -65,23 +68,27 @@ public class WrapAround : MonoBehaviour
 
     private Vector2 GetTopPosition()
     {
-        return mainCamera.transform.position + mainCamera.transform.up * mainCamera.orthographicSize;
+        return mainCamera.transform.position + mainCamera.transform.up * mainCamera.orthographicSize
+            + Vector3.up * offset;
     }
 
     private Vector2 GetBottomPosition()
     {
-        return mainCamera.transform.position - mainCamera.transform.up * mainCamera.orthographicSize;
+        return mainCamera.transform.position - mainCamera.transform.up * mainCamera.orthographicSize 
+            - Vector3.up * offset;
     }
 
     private Vector2 GetRightPosition()
     {
         return mainCamera.transform.position +
-            mainCamera.transform.right * mainCamera.orthographicSize * mainCamera.aspect;
+            mainCamera.transform.right * mainCamera.orthographicSize * mainCamera.aspect 
+            + Vector3.right * offset;
     }
 
     private Vector2 GetLeftPosition()
     {
         return mainCamera.transform.position -
-            mainCamera.transform.right * mainCamera.orthographicSize * mainCamera.aspect;
+            mainCamera.transform.right * mainCamera.orthographicSize * mainCamera.aspect 
+            - Vector3.right * offset;
     }
 }
