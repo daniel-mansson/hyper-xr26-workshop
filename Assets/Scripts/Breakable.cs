@@ -31,7 +31,8 @@ public class Breakable : MonoBehaviour
             var newBody = newObject.GetComponent<Rigidbody2D>();
             if(newBody != null)
             {
-                newBody.linearVelocity = Random.insideUnitCircle * spawnVelocity;
+                newBody.linearVelocity = Random.insideUnitCircle.normalized * spawnVelocity;
+                newBody.angularVelocity = Random.Range(-860f, 860f);
             }
         }
 
