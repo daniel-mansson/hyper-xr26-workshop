@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6192766602536182808}
   - component: {fileID: 3311283254069024633}
   - component: {fileID: 132115996548122698}
+  - component: {fileID: 937153912333274055}
   m_Layer: 6
   m_Name: SmallAsteroid
   m_TagString: Untagged
@@ -181,3 +182,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnOnBreak: []
   spawnVelocity: 0
+--- !u!114 &937153912333274055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7914545272900212738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a728a9d877af03408c2186e713be168, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
