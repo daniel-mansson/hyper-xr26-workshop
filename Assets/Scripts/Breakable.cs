@@ -34,6 +34,16 @@ public class Breakable : MonoBehaviour
                 newBody.linearVelocity = Random.insideUnitCircle.normalized * spawnVelocity;
                 newBody.angularVelocity = Random.Range(-860f, 860f);
             }
+
+            var newAsteroid = newObject.GetComponent<Asteroid>();
+            if(newAsteroid != null)
+            {
+                var currentAsteroid = GetComponent<Asteroid>();
+                if(currentAsteroid != null)
+                {
+                    newAsteroid.Initialize(currentAsteroid);
+                }
+            }
         }
 
         Destroy(gameObject);

@@ -2,18 +2,17 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static int AsteroidCount = 0;
-
     [SerializeField]
-    private Rigidbody2D asteroidPrefab;
+    private Asteroid asteroidPrefab;
     [SerializeField]
     private float spawnVelocity;
 
     private int levelNumber;
+    public int asteroidCount = 0;
 
     private void Awake()
     {
-        AsteroidCount = 0;
+        asteroidCount = 0;
     }
 
     void Update()
@@ -22,13 +21,14 @@ public class GameManager : MonoBehaviour
         {
             GoToNextLevel();
         }
-
     }
 
     private void OnGUI()
     {
+        GUI.matrix = Matrix4x4.Scale(Vector3.one * 5f);
+
         GUILayout.Label("Level Number: " + levelNumber);
-        GUILayout.Label("Asteroids: " + AsteroidCount);
+        GUILayout.Label("Asteroids: " + asteroidCount);
     }
 
     private void GoToNextLevel()
@@ -40,7 +40,10 @@ public class GameManager : MonoBehaviour
         {
             Vector2 position =  Random.insideUnitCircle.normalized * camera.orthographicSize;
 
-            var asteroidBody = Instantiate(asteroidPrefab, position, Quaternion.identity);
+            var asteroid = Instantiate(asteroidPrefab, position, Quaternion.identity);
+            asteroid.Initialize(this);
+
+            var asteroidBody = asteroid.GetComponent<Rigidbody2D>();
             asteroidBody.linearVelocity = Random.insideUnitCircle.normalized * spawnVelocity;
             asteroidBody.angularVelocity = Random.Range(-860f, 860f);
         }
@@ -50,6 +53,16 @@ public class GameManager : MonoBehaviour
 
     private bool IsAllAsteroidsDestroyed()
     {
-        return AsteroidCount == 0;
+        return asteroidCount == 0;
+    }
+
+    public void OnAsteroidCreated()
+    {
+        asteroidCount += 1;
+    }
+
+    public void OnAsteroidDestroyed()
+    {
+        asteroidCount -= 1;
     }
 }

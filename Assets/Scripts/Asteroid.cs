@@ -2,13 +2,25 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
+    private GameManager gameManager;
+
+    public void Initialize(GameManager gameManager)
+    {
+        this.gameManager = gameManager;
+    }
+
+    public void Initialize(Asteroid parent)
+    {
+        this.gameManager = parent.gameManager;
+    }
+
     private void Start()
     {
-        GameManager.AsteroidCount += 1;
+        gameManager.OnAsteroidCreated();
     }
 
     private void OnDestroy()
     {
-        GameManager.AsteroidCount -= 1;
+        gameManager.OnAsteroidDestroyed();
     }
 }
